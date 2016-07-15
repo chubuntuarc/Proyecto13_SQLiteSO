@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Proyecto13_SQLiteSO</string>
+    <string name="app_name">SQLite SO</string>
+    <string name="agregar">Agregar</string>
+    <string name="eliminar">Eliminar</string>
 </resources>
