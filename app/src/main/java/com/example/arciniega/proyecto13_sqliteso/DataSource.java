@@ -5,6 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by arciniega on 15/07/16.
@@ -62,5 +66,40 @@ public class DataSource {
         Comentario nvocomentario = cursorToComentario(cursor);
 
         return nvocomentario;
+    }
+
+    // Método para eliminar un registro de la tabla
+    public void eliminar(Comentario comentario){
+        long id = comentario.getId();
+
+        // Se elimina el registro tomando como base el id del objeto 'comentario'
+        database.delete(MySQLiteHelper.TABLE_COMENTARIO,
+                MySQLiteHelper.COLUMN_ID + "=" + id, null);
+
+        // Confirmar en consola
+        System.out.println("Registro eliminado " + id);
+    }
+
+    // Método para devolver un listado de todos los registros exostentes en la tabla
+    public List<Comentario> listarComentarios(){
+
+        List<Comentario> comentarios = new ArrayList<>();
+
+        Cursor cursor = database.query(
+          MySQLiteHelper.TABLE_COMENTARIO,columnas,null,null,null,null,null
+        );
+
+        // ..se debe convertir en un list
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            Comentario comentario = cursorToComentario(cursor);
+            comentarios.add(comentario);
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+
+        // Se devuelve el objeto list
+        return comentarios;
     }
 }
