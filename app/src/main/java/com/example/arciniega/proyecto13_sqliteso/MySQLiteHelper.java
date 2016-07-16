@@ -25,7 +25,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     public static final int DATABASE_VERSION = 1;
 
     // Constructor de la clase
-    public MySQLiteHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+    public MySQLiteHelper(Context context) {
         // Crea la base de datos al instalar la aplicación en el dispositivo móvil
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
